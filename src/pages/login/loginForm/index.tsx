@@ -73,7 +73,11 @@ export const LoginForm = ({ onLoginSuccess, onOpenRegister, provideClear }: Logi
           <InputText
             id="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) =>
+              setUsername(
+                e.target.value.replace(/\b\w/g, (char) => char.toUpperCase())
+              )
+            }
             onKeyDown={(e) => {
               if (e.key === "Enter" && username && password) {
                 handleLogin();

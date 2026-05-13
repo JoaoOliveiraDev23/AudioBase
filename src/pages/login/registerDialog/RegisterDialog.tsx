@@ -66,7 +66,14 @@ export const RegisterDialog = ({ visible, onHide, onSuccess }: RegisterDialogPro
           <label>Usuário</label>
           <InputText
             value={newUser.username}
-            onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              setNewUser({
+                ...newUser,
+                username: value.replace(/\b\w/g, (char) => char.toUpperCase()),
+              });
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && newUser.username && newUser.password && newUser.confirm) {
                 handleSaveUser();
